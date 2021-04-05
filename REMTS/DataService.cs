@@ -11,25 +11,5 @@ namespace REMTS
 {
     class DataService
     {
-        public string Test()
-        {
-            Runspace runspace = RunspaceFactory.CreateRunspace();
-            runspace.Open();
-
-            using PowerShell ps = PowerShell.Create();
-            ps.Runspace = runspace;
-            ps.AddScript("Get-Process");
-            Collection<PSObject> powerShellResult = ps.Invoke();
-            runspace.Close();
-
-            String result;
-
-            foreach (var item in powerShellResult)
-            {
-                result += $"\n{item.Members.ToString()}";
-            }
-
-            return powerShellResult.ToString();
-        }
     }
 }

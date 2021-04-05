@@ -25,10 +25,6 @@ namespace REMTS
         {
             InitializeComponent();
             DataContext = this;
-
-
-            DataService dataService = new DataService();
-            HelloWorld = dataService.Test();
         }
     }
 }

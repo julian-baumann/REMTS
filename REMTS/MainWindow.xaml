@@ -7,7 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         >
-    <Grid>
-        <TextBlock Text="{Binding HelloWorld}" />
-    </Grid>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="Paste" ToolTip="Paste from Windows Clipboard.">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="20" Source="/Gui;component/Resources/Images/Plus.png" />
+                        <TextBlock Margin="3,0,0,0">Paste</TextBlock>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="93*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding HelloWorld}" Grid.ColumnSpan="2" />
+        </Grid>
+    </DockPanel>
 </Window>
