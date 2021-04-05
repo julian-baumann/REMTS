@@ -10,10 +10,9 @@
 
     <StackPanel>
         <CommandBar DefaultLabelPosition="Right" OverflowButtonVisibility="Collapsed">
-            <AppBarButton Icon="Add" Label="Add new PC" />
+            <AppBarButton Icon="Add" Label="Add new PC" Click="AddPcClicked" />
             <AppBarSeparator />
-            <AppBarButton Icon="Play" Label="Run DO" />
-            <AppBarButton Icon="Play" Label="Run BC" />
+            <AppBarButton Icon="Play" Label="Run Delivery Optimization" />
         </CommandBar>
         
         <TextBlock>HelloWorld</TextBlock>

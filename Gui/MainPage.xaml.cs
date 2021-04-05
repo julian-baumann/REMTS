@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gui.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace Gui
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        public async void AddPcClicked(object sender, RoutedEventArgs args)
+        {
+            var dialog = new AddDeviceDialog();
+            await dialog.ShowAsync();
         }
     }
 }

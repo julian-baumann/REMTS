@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteExecuter", "RemoteExecuter\RemoteExecuter.csproj", "{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gui", "Gui\Gui.csproj", "{184C867E-8955-42E7-B7F6-130E986AF099}"
+	ProjectSection(ProjectDependencies) = postProject
+		{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A} = {77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
