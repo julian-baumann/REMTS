@@ -20,9 +20,15 @@ namespace REMTS
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string HelloWorld { get; set; } = "Hello World, this is a Test";
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+
+
+            DataService dataService = new DataService();
+            HelloWorld = dataService.Test();
         }
     }
 }
