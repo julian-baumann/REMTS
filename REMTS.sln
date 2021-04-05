@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.218
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REMTS", "REMTS\REMTS.csproj", "{7804F2AC-F9E1-4F59-ABC3-314F8335FEEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "REMTS", "REMTS\REMTS.csproj", "{7804F2AC-F9E1-4F59-ABC3-314F8335FEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DDF4B1B1-ED2C-4799-BCFB-3C1F13084952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{DDF4B1B1-ED2C-4799-BCFB-3C1F13084952}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteExecuter", "RemoteExecuter\RemoteExecuter.csproj", "{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DDF4B1B1-ED2C-4799-BCFB-3C1F13084952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF4B1B1-ED2C-4799-BCFB-3C1F13084952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF4B1B1-ED2C-4799-BCFB-3C1F13084952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E7F7E6-0190-43E1-ABB2-DB3CE460BB3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
