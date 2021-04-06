@@ -7,21 +7,49 @@
         mc:Ignorable="d"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
-        Title="MainWindow" Height="450" Width="800"
-        >
-        <StackPanel>
-            <ui:CommandBar>
-                <ui:AppBarToggleButton Icon="Shuffle" Label="Shuffle" />
-                <ui:AppBarToggleButton Icon="RepeatAll" Label="Repeat"/>
-                <ui:AppBarSeparator/>
-                <ui:AppBarButton Icon="Back" Label="Back"/>
-                <ui:AppBarButton Icon="Stop" Label="Stop" />
-                <ui:AppBarButton Icon="Play" Label="Play" />
-                <ui:AppBarButton Icon="Forward" Label="Forward" />
-            </ui:CommandBar>
+        Title="DO/BC Monitor"
+        Height="450"
+        Width="800"
+        MinHeight="400"
+        MinWidth="500"
+>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.SaveCommand}" Executed="SaveCommandPressed"/>
+    </Window.CommandBindings>
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-            <TextBlock Text="My first ModernWPF app" />
-            <Button Content="I am a button" />
-            <Button Content="I am an accent button" />
-        </StackPanel>
+        <ui:CommandBar Grid.Row="0">
+            <ui:AppBarButton Icon="Add" Label="New PC" Click="AddNewPcClicked" />
+            <ui:AppBarSeparator/>
+            <ui:AppBarButton Icon="Play" Label="DO-PerfSnap"/>
+            <ui:AppBarSeparator/>
+            <ui:AppBarButton Icon="Save" Label="Save" Click="SaveComputerListToFileClicked" />
+            <ui:AppBarButton Icon="Share" Label="Load" Click="LoadComputersClicked" />
+            <ui:AppBarButton Name="deletePcButton" Foreground="Red" Icon="Delete" Label="Delete PC(s)" IsEnabled="false" Click="DeletePcClicked" />
+        </ui:CommandBar>
+
+        <ListView Margin="0"
+                  Name="computersList"
+                  ItemsSource="{Binding Computers}"
+                  SelectionChanged="ComputerSelectionChanged"
+                  Grid.Row="1"
+        >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding IpAddress}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding DisplayName}" FontSize="12" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+
 </Window>

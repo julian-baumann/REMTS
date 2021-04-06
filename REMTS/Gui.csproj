@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RemoteExecuter\RemoteExecuter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Images\Plus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

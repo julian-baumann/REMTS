@@ -1,0 +1,23 @@
+﻿<ui:ContentDialog
+    x:Class="Gui.Dialogs.AddPcDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="Add new PC"
+    PrimaryButtonText="Add"
+    PrimaryButtonClick="AddClicked"
+    CloseButtonText="Cancel"
+    DefaultButton="Primary"
+>
+    <StackPanel>
+        <TextBlock Text="Ip Address:"/>
+        <TextBox Name="ipAddressTextBox" />
+
+        <TextBlock x:Name="errorTextBlock" Foreground="Red" Margin="0, 0, 0, 10">
+        </TextBlock>
+
+        <TextBlock Text="Display Name (optional):"/>
+        <TextBox Name="displayNameTextBox" />
+
+    </StackPanel>
+</ui:ContentDialog>
