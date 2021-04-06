@@ -11,12 +11,30 @@
     Title="DeliveryOptimizationPage"
 >
 
-    <StackPanel>
-        <Button Click="GoBack" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
-        <ui:ProgressRing
-            IsActive="True"
-            Height="60"
-            Width="60"
-        ></ui:ProgressRing>
-    </StackPanel>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Button Click="GoBack" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Margin="20">
+            <DataGrid
+                HeadersVisibility="Column"
+                GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    
+                </DataGrid.Columns>
+                <DataGrid.GroupStyle>
+                    <GroupStyle
+                        ContainerStyle="{StaticResource DataGridRowGroupContainerStyle}"
+                        HeaderTemplate="{StaticResource RowGroupHeaderTemplate}" />
+                </DataGrid.GroupStyle>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
 </Page>
