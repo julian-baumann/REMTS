@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 using RemoteExecuter.Entities;
 using System.Collections.ObjectModel;
 using Gui;
+using Gui.Pages;
+using Frame = ModernWpf.Controls.Frame;
+using ModernWpf.Media.Animation;
 
 namespace REMTS
 {
@@ -25,69 +28,29 @@ namespace REMTS
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static RoutedCommand SaveCommand = new RoutedCommand();
+        public static Frame ContentFrame;
 
-        public ObservableCollection<RemotePcInfo> Computers { get; set; } = new ObservableCollection<RemotePcInfo>();
+        private static Type _startPageInstance;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
 
-            SaveCommand.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+            ContentFrame = contentFrame;
+
+            ContentFrame.Navigate(typeof(StartPage));
+
+            _startPageInstance = ContentFrame.CurrentSourcePageType;
         }
 
-        public async void AddNewPcClicked(object sender, RoutedEventArgs e)
+        public static void NavigateToPage(Type page)
         {
-            AddPcDialog dialog = new AddPcDialog();
-            ContentDialogResult result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                Computers.Add(dialog.PcInfo);
-            }
+            ContentFrame.Navigate(page, null, new DrillInNavigationTransitionInfo());
         }
 
-        private void DeletePcClicked(object sender, RoutedEventArgs e)
+        public static void NavigateBack()
         {
-            while (computersList.SelectedItems.Count > 0)
-            {
-                if ((RemotePcInfo)computersList.SelectedItem != null)
-                {
-                    Computers.Remove((RemotePcInfo)computersList.SelectedItem);
-                }
-            }
-
-        }
-        private void SaveComputerListToFileClicked(object sender, RoutedEventArgs e)
-        {
-            StorageService.SavePcData(Computers.ToList());
-        }
-
-        private void LoadComputersClicked(object sender, RoutedEventArgs e)
-        {
-            RemotePcInfo[] computers = StorageService.LoadPcDataFromFile();
-
-            if (computers.Length > 0)
-            {
-                Computers.Clear();
-
-                foreach (RemotePcInfo pc in computers)
-                {
-                    Computers.Add(pc);
-                }
-            }
-
-        }
-
-        private void ComputerSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            deletePcButton.IsEnabled = computersList.SelectedItems.Count > 0;
-        }
-
-        private void SaveCommandPressed(object sender, ExecutedRoutedEventArgs args)
-        {
-            StorageService.SavePcData(Computers.ToList());
+            ContentFrame.GoBack();
         }
     }
 }

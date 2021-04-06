@@ -13,43 +13,7 @@
         MinHeight="400"
         MinWidth="500"
 >
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:MainWindow.SaveCommand}" Executed="SaveCommandPressed"/>
-    </Window.CommandBindings>
-    
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <ui:CommandBar Grid.Row="0">
-            <ui:AppBarButton Icon="Add" Label="New PC" Click="AddNewPcClicked" />
-            <ui:AppBarSeparator/>
-            <ui:AppBarButton Icon="Play" Label="DO-PerfSnap"/>
-            <ui:AppBarSeparator/>
-            <ui:AppBarButton Icon="Save" Label="Save" Click="SaveComputerListToFileClicked" />
-            <ui:AppBarButton Icon="Share" Label="Load" Click="LoadComputersClicked" />
-            <ui:AppBarButton Name="deletePcButton" Foreground="Red" Icon="Delete" Label="Delete PC(s)" IsEnabled="false" Click="DeletePcClicked" />
-        </ui:CommandBar>
-
-        <ListView Margin="0"
-                  Name="computersList"
-                  ItemsSource="{Binding Computers}"
-                  SelectionChanged="ComputerSelectionChanged"
-                  Grid.Row="1"
-        >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding IpAddress}" FontWeight="Bold" />
-                        <TextBlock Text="{Binding DisplayName}" FontSize="12" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-    </Grid>
+    <ui:Frame x:Name="contentFrame">
+    </ui:Frame>
 
 </Window>
