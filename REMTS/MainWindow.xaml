@@ -10,6 +10,16 @@
         Title="MainWindow" Height="450" Width="800"
         >
         <StackPanel>
+            <ui:CommandBar>
+                <ui:AppBarToggleButton Icon="Shuffle" Label="Shuffle" />
+                <ui:AppBarToggleButton Icon="RepeatAll" Label="Repeat"/>
+                <ui:AppBarSeparator/>
+                <ui:AppBarButton Icon="Back" Label="Back"/>
+                <ui:AppBarButton Icon="Stop" Label="Stop" />
+                <ui:AppBarButton Icon="Play" Label="Play" />
+                <ui:AppBarButton Icon="Forward" Label="Forward" />
+            </ui:CommandBar>
+
             <TextBlock Text="My first ModernWPF app" />
             <Button Content="I am a button" />
             <Button Content="I am an accent button" />
