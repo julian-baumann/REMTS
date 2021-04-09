@@ -30,7 +30,7 @@ namespace REMTS
     {
         public static Frame ContentFrame;
 
-        private static Type _startPageInstance;
+        public static event EventHandler PageRendered;
 
         public MainWindow()
         {
@@ -39,8 +39,6 @@ namespace REMTS
             ContentFrame = contentFrame;
 
             ContentFrame.Navigate(typeof(StartPage));
-
-            _startPageInstance = ContentFrame.CurrentSourcePageType;
         }
 
         public static void NavigateToPage(Type page)
@@ -50,6 +48,7 @@ namespace REMTS
 
         public static void NavigateBack()
         {
+            ContentFrame.ContentRendered += PageRendered;
             ContentFrame.GoBack();
         }
     }

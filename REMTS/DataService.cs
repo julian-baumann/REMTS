@@ -13,11 +13,11 @@ namespace REMTS
 {
     public class DataService
     {
-        private DataService _instance;
+        private static DataService _instance;
 
         private DeliveryOptimization _deliveryOptimization;
 
-        public DataService Instance
+        public static  DataService Instance
         {
             get
             {
@@ -38,13 +38,17 @@ namespace REMTS
 
         public RemotePcInfo[] ComputerList { get; set; }
 
-        public void RunDeliveryOptimization()
+        public DeliveryOptimizationItem[][] RunDeliveryOptimization()
         {
+            List<DeliveryOptimizationItem[]> result = new List<DeliveryOptimizationItem[]>();
+
             foreach (RemotePcInfo pc in ComputerList)
             {
                 DeliveryOptimizationItem[] items = _deliveryOptimization.GetDataFromRemotePC(pc);
+                result.Add(items);
             }
 
+            return result.ToArray();
         }
     }
 }

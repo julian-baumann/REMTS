@@ -18,6 +18,7 @@ using ModernWpf.Controls;
 using RemoteExecuter.Entities;
 using ModernWpf.Media.Animation;
 using Page = System.Windows.Controls.Page;
+using REMTS;
 
 namespace Gui.Pages
 {
@@ -26,13 +27,16 @@ namespace Gui.Pages
     /// </summary>
     public partial class StartPage : Page
     {
+
+        private DataService _dataService = DataService.Instance;
+
+        public ObservableCollection<RemotePcInfo> Computers { get; set; } = new ObservableCollection<RemotePcInfo>();
+
         public StartPage()
         {
             InitializeComponent();
             DataContext = this;
         }
-
-        public ObservableCollection<RemotePcInfo> Computers { get; set; } = new ObservableCollection<RemotePcInfo>();
 
         public async void AddNewPcClicked(object sender, RoutedEventArgs e)
         {
@@ -89,7 +93,8 @@ namespace Gui.Pages
 
         private void DoPerfSnapClick(object sender, RoutedEventArgs e)
         {
-            REMTS.MainWindow.NavigateToPage(typeof(DeliveryOptimizationPage));
+            _dataService.ComputerList = Computers.ToArray();
+            MainWindow.NavigateToPage(typeof(DeliveryOptimizationPage));
         }
     }
 }

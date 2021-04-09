@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModernWpf.Controls;
+using REMTS;
 using Page = System.Windows.Controls.Page;
 
 namespace Gui.Pages
@@ -22,14 +23,23 @@ namespace Gui.Pages
     /// </summary>
     public partial class DeliveryOptimizationPage : Page
     {
+        private DataService _dataService = DataService.Instance;
+
         public DeliveryOptimizationPage()
         {
             InitializeComponent();
+
+            MainWindow.PageRendered += PageRendered;
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            REMTS.MainWindow.NavigateBack();
+            MainWindow.NavigateBack();
+        }
+
+        private void PageRendered(object sender, EventArgs e)
+        {
+            _dataService.RunDeliveryOptimization();
         }
     }
 }
