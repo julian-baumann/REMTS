@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace RemoteExecuter.Entities
 {
-    public class DeliveryOptimizationItem
+    public enum ConsoleResultStates
     {
-        public string Name { get; set; }
-        public string Value { get; set; }
+        Running = 0,
+        Error,
+        Done
     }
 }

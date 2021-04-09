@@ -9,7 +9,7 @@ namespace RemoteExecuter
 {
     public class DeliveryOptimization
     {
-        public DeliveryOptimizationItem[] GetDataFromRemotePC(RemotePcInfo pc)
+        public static ConsoleResultItem[] GetDataFromRemotePC(RemotePcInfo pc)
         {
             Runspace runspace;
 
@@ -26,7 +26,7 @@ namespace RemoteExecuter
 
             runspace.Open();
 
-            List<DeliveryOptimizationItem> result = new List<DeliveryOptimizationItem>();
+            List<ConsoleResultItem> result = new List<ConsoleResultItem>();
 
             using (PowerShell ps = PowerShell.Create())
             {
@@ -58,7 +58,7 @@ namespace RemoteExecuter
                         if (member.MemberType == PSMemberTypes.Property)
                         {
                             result.Add(
-                                new DeliveryOptimizationItem
+                                new ConsoleResultItem
                                 {
                                     Name = member.Name,
                                     Value = member.Value.ToString()
@@ -71,6 +71,32 @@ namespace RemoteExecuter
 
             runspace.Close();
             return result.ToArray();
+        }
+
+        public static IEnumerable<ConsoleResult> RunFromList(RemotePcInfo[] computers)
+        {
+            int index = 0;
+
+            foreach (RemotePcInfo pc in computers)
+            {
+                ConsoleResult consoleResult = new ConsoleResult
+                {
+                    Index = index,
+                    Pc = pc,
+                    State = ConsoleResultStates.Done
+                };
+
+                yield return consoleResult;
+
+                ConsoleResultItem[] items = GetDataFromRemotePC(pc);
+
+                consoleResult.Data = items;
+                consoleResult.State = ConsoleResultStates.Done;
+
+                yield return consoleResult;
+
+                index++;
+            }
         }
     }
 }

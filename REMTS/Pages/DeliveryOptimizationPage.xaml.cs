@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModernWpf.Controls;
+using RemoteExecuter.Entities;
 using REMTS;
 using Page = System.Windows.Controls.Page;
 
@@ -24,6 +26,9 @@ namespace Gui.Pages
     public partial class DeliveryOptimizationPage : Page
     {
         private DataService _dataService = DataService.Instance;
+
+        public ConsoleResultItem[][] Items { get; set; }
+
 
         public DeliveryOptimizationPage()
         {
@@ -37,9 +42,22 @@ namespace Gui.Pages
             MainWindow.NavigateBack();
         }
 
+        private void RenderTable(ConsoleResultItem[][] data)
+        {
+            int rows = data.GetLength(0);
+            int columns = data.GetLength(1);
+
+            DataTable table = new DataTable();
+
+            for (int i = 0; i < columns; i++)
+            {
+                table.Columns.Add(new DataColumn(data[i].))
+            }
+        }
+
         private void PageRendered(object sender, EventArgs e)
         {
-            _dataService.RunDeliveryOptimization();
+            Items = _dataService.RunDeliveryOptimization();
         }
     }
 }

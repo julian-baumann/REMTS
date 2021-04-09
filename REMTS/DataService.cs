@@ -38,17 +38,5 @@ namespace REMTS
 
         public RemotePcInfo[] ComputerList { get; set; }
 
-        public DeliveryOptimizationItem[][] RunDeliveryOptimization()
-        {
-            List<DeliveryOptimizationItem[]> result = new List<DeliveryOptimizationItem[]>();
-
-            foreach (RemotePcInfo pc in ComputerList)
-            {
-                DeliveryOptimizationItem[] items = _deliveryOptimization.GetDataFromRemotePC(pc);
-                result.Add(items);
-            }
-
-            return result.ToArray();
-        }
     }
 }

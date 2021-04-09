@@ -24,6 +24,7 @@
 
         <GroupBox Grid.Row="1" Margin="20">
             <DataGrid
+                x:Name="dataGridTable"
                 HeadersVisibility="Column"
                 GridLinesVisibility="Horizontal">
                 <DataGrid.Columns>

@@ -13,7 +13,7 @@ namespace Test
         static void Main(string[] args)
         {
             var deliveryOptimization = new DeliveryOptimization();
-            DeliveryOptimizationItem[] result = deliveryOptimization.GetDataFromRemotePC(new RemotePcInfo { IpAddress = "local" });
+            ExecutedCommandResult[] result = deliveryOptimization.GetDataFromRemotePC(new RemotePcInfo { IpAddress = "local" });
 
             foreach (var item in result)
             {

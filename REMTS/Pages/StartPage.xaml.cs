@@ -38,7 +38,7 @@ namespace Gui.Pages
             DataContext = this;
         }
 
-        public async void AddNewPcClicked(object sender, RoutedEventArgs e)
+        private async void AddNewPcClicked(object sender, RoutedEventArgs e)
         {
             AddPcDialog dialog = new AddPcDialog();
             ContentDialogResult result = await dialog.ShowAsync();
