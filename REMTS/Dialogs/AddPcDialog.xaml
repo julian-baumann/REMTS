@@ -10,7 +10,7 @@
     DefaultButton="Primary"
 >
     <StackPanel>
-        <TextBlock Text="Ip Address:"/>
+        <TextBlock Text="ComputerName:"/>
         <TextBox Name="ipAddressTextBox" />
 
         <TextBlock x:Name="errorTextBlock" Foreground="Red" Margin="0, 0, 0, 10">
