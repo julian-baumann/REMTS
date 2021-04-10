@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModernWpf.Controls;
+using Namotion.Reflection;
+using RemoteExecuter;
 using RemoteExecuter.Entities;
 using REMTS;
 using Page = System.Windows.Controls.Page;
@@ -27,14 +30,18 @@ namespace Gui.Pages
     {
         private DataService _dataService = DataService.Instance;
 
-        public ConsoleResultItem[][] Items { get; set; }
+        public bool IsLoading { get; set; } = true;
 
+        public string CurrentStatusText { get; set; }
+
+        public DataTable TableData { get; set; } = new DataTable();
 
         public DeliveryOptimizationPage()
         {
             InitializeComponent();
+            DataContext = this;
 
-            MainWindow.PageRendered += PageRendered;
+            Task.Run(() => PageRendered());
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -48,16 +55,72 @@ namespace Gui.Pages
             int columns = data.GetLength(1);
 
             DataTable table = new DataTable();
-
-            for (int i = 0; i < columns; i++)
-            {
-                table.Columns.Add(new DataColumn(data[i].))
-            }
         }
 
-        private void PageRendered(object sender, EventArgs e)
+        private void PageRendered()
         {
-            Items = _dataService.RunDeliveryOptimization();
+            if (_dataService.ComputerList?.Length > 0)
+            {
+                List<RemotePcInfo> errors = new List<RemotePcInfo>();
+
+                bool headersSet = false;
+
+                foreach (ConsoleResult consoleResult in DeliveryOptimization.RunFromList(_dataService.ComputerList))
+                {
+                    if (consoleResult.State == ConsoleResultStates.Running)
+                    {
+                        string updateStatus = $"{consoleResult.Pc.IpAddress} ({consoleResult.Pc.DisplayName}), {consoleResult.Index + 1} of {_dataService.ComputerList.Length}";
+                        Application.Current.Dispatcher.Invoke(new Action(() => { statusTextBlock.Text = updateStatus; }));
+                    }
+                    else if (consoleResult.State == ConsoleResultStates.Done)
+                    {
+
+                        if (!headersSet)
+                        {
+                            TableData.Columns.Add("Variable-Name");
+
+                            foreach (var item in consoleResult.Data)
+                            {
+                                DataRow newLabelRow = TableData.NewRow();
+                                newLabelRow[0] = item.Name;
+                                TableData.Rows.Add(newLabelRow);
+                            }
+
+                            headersSet = true;
+                        }
+
+                        string name = consoleResult.Pc.DisplayName?.Length > 0 ? consoleResult.Pc.DisplayName : consoleResult.Pc.IpAddress;
+
+                        TableData.Columns.Add(new DataColumn(name));
+
+                        for (int index = 0; index < consoleResult.Data.Length; index++)
+                        {
+                            TableData.Rows[index][TableData.Columns.IndexOf(name)] = consoleResult.Data[index].Value;
+                        }
+                    }
+                    else if (consoleResult.State == ConsoleResultStates.Error)
+                    {
+                        errors.Add(consoleResult.Pc);
+                    }
+
+                    Application.Current.Dispatcher.Invoke(new Action(() => { dataGridTable.ItemsSource = TableData.AsDataView(); }));
+                }
+
+
+                string text = "Test";
+
+                if (errors.Count > 0)
+                {
+                    text = $"Errors appeared on {string.Join(", ", errors.Select(x => $"{x.IpAddress} ({x.DisplayName})"))}";
+                }
+
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    statusTextBlock.Text = text;
+                    statusTextBlock.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("Red");
+                    loadingSpinner.Visibility = Visibility.Hidden;
+                }));
+            }
         }
     }
 }

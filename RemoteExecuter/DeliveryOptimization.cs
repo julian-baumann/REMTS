@@ -83,15 +83,25 @@ namespace RemoteExecuter
                 {
                     Index = index,
                     Pc = pc,
-                    State = ConsoleResultStates.Done
+                    State = ConsoleResultStates.Running
                 };
 
                 yield return consoleResult;
+                
+                ConsoleResultItem[] items = new ConsoleResultItem[] { };
 
-                ConsoleResultItem[] items = GetDataFromRemotePC(pc);
+                consoleResult.State = ConsoleResultStates.Error;
 
-                consoleResult.Data = items;
-                consoleResult.State = ConsoleResultStates.Done;
+                try
+                {
+                    items = GetDataFromRemotePC(pc);
+                    consoleResult.Data = items;
+                    consoleResult.State = ConsoleResultStates.Done;
+                }
+                catch (Exception)
+                {
+                    consoleResult.State = ConsoleResultStates.Error;
+                }
 
                 yield return consoleResult;
 

@@ -14,23 +14,28 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
+        <WrapPanel Grid.Row="0">
             <Button Click="GoBack" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
-        </StackPanel>
+            <ui:ProgressRing
+                x:Name="loadingSpinner"
+                IsActive="{Binding IsLoading}"
+                Height="2"
+                Width="10"/>
+            <TextBlock x:Name="statusTextBlock" VerticalAlignment="Center" Margin="10,0,0,0" />
+        </WrapPanel>
 
-        <GroupBox Grid.Row="1" Margin="20">
+
+        <GroupBox Margin="0,20,0,0" Grid.RowSpan="2">
             <DataGrid
-                x:Name="dataGridTable"
+                Name="dataGridTable"
                 HeadersVisibility="Column"
-                GridLinesVisibility="Horizontal">
-                <DataGrid.Columns>
-                    
-                </DataGrid.Columns>
-            </DataGrid>
+                ItemsSource="{Binding TableData}"
+                IsReadOnly="True"
+                GridLinesVisibility="All"/>
         </GroupBox>
     </Grid>
 </Page>
