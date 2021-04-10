@@ -1,23 +1,18 @@
-﻿using System;
+﻿using RemoteExecuter;
+using RemoteExecuter.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
-using System.Collections.ObjectModel;
-using RemoteExecuter.Entities;
-using RemoteExecuter;
 
-namespace REMTS
+namespace UserInterface.Services
 {
-    public class DataService
+    class DataService
     {
         private static DataService _instance;
 
-        private DeliveryOptimization _deliveryOptimization;
-
-        public static  DataService Instance
+        public static DataService Instance
         {
             get
             {
@@ -32,10 +27,8 @@ namespace REMTS
 
         public DataService()
         {
-            _deliveryOptimization = new DeliveryOptimization();
         }
 
         public RemotePcInfo[] ComputerList { get; set; }
-
     }
 }
