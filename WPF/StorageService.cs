@@ -21,7 +21,6 @@ namespace Gui
 
             if (saveFileDialog.ShowDialog() == true)
             {
-
                 File.WriteAllText(saveFileDialog.FileName, json);
             }
         }

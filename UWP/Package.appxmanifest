@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="a410046c-8d56-4ca3-819d-c4b540961b23"
-    Publisher="CN=a.jbaumann"
+    Name="1788c103-f6ff-494a-bc5d-50289c2f13f8"
+    Publisher="CN=julia"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="a410046c-8d56-4ca3-819d-c4b540961b23" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="1788c103-f6ff-494a-bc5d-50289c2f13f8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Gui</DisplayName>
-    <PublisherDisplayName>a.jbaumann</PublisherDisplayName>
+    <DisplayName>UWP</DisplayName>
+    <PublisherDisplayName>julia</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="Gui.App">
+      EntryPoint="REMTS.App">
       <uap:VisualElements
         DisplayName="REMTS"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Remote Execute Me That Shit"
+        Description="REMTS"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
